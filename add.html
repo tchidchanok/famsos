@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>เพิ่มครอบครัวใน FAMSOS</title>
+<style>
+  :root { --text:#1f2328; --muted:#59636e; --accent:#d32f2f; --bg:#ffffff; --card:#f6f8fa; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text:#e6edf3; --muted:#9198a1; --accent:#ff6b6b; --bg:#0d1117; --card:#161b22; }
+  }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font:17px/1.7 -apple-system, "Segoe UI", "Noto Sans Thai", Sarabun, sans-serif; }
+  main { max-width:520px; margin:0 auto; padding:40px 16px; text-align:center; }
+  h1 { font-size:26px; margin:0 0 8px; }
+  h1 span { color:var(--accent); }
+  .btn { display:block; margin:28px 0 12px; padding:16px; border-radius:14px;
+         background:var(--accent); color:#fff; font-weight:700; font-size:19px;
+         text-decoration:none; }
+  .card { background:var(--card); border-radius:14px; padding:16px; margin-top:24px;
+          text-align:left; color:var(--muted); font-size:15px; }
+  .card b { color:var(--text); }
+  .err { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>เพิ่มครอบครัวใน <span>FAMSOS</span></h1>
+  <p id="lead">มีคนในครอบครัวส่งลิงก์นี้ให้คุณ เพื่อเพิ่มกันเป็นครอบครัวในแอป</p>
+  <a id="open" class="btn" href="#">เปิดในแอป FAMSOS</a>
+  <div class="card">
+    <p><b>แอปไม่เปิด?</b> ถ้าเปิดลิงก์ใน LINE ให้กด <b>⋯</b> มุมขวาบน แล้วเลือก <b>เปิดในเบราว์เซอร์</b> จากนั้นกดปุ่มด้านบนอีกครั้ง</p>
+    <p><b>ยังไม่มีแอป?</b> ขอลิงก์ติดตั้ง FAMSOS จากคนที่ส่งลิงก์นี้มา ติดตั้งแล้วกลับมากดลิงก์นี้อีกครั้ง</p>
+    <p>ข้อมูลในลิงก์มีแค่ชื่อและรหัสสำหรับเข้ารหัสข้อความของผู้ส่ง เว็บนี้ไม่ได้เก็บข้อมูลใด ๆ</p>
+  </div>
+  <p style="margin-top:28px;font-size:14px"><a href="privacy.html" style="color:var(--muted)">นโยบายความเป็นส่วนตัว</a></p>
+</main>
+<script>
+  (function () {
+    var d = location.hash.slice(1);
+    var btn = document.getElementById('open');
+    if (!/^[A-Za-z0-9_-]{8,2000}$/.test(d)) {
+      document.getElementById('lead').innerHTML =
+        '<span class="err">ลิงก์ไม่สมบูรณ์ ขอให้ผู้ส่งแชร์ใหม่จากแอป FAMSOS</span>';
+      btn.style.display = 'none';
+      return;
+    }
+    var q = 'add?d=' + d;
+    var android = /Android/i.test(navigator.userAgent);
+    btn.href = android
+      ? 'intent://' + q + '#Intent;scheme=famsos;package=com.tchidchanok.famsos;end'
+      : 'famsos://' + q;
+    // ลองเปิดแอปให้เลย ถ้าไม่เปิด ผู้ใช้กดปุ่มเองได้
+    setTimeout(function () { location.href = btn.href; }, 400);
+  })();
+</script>
+</body>
+</html>
