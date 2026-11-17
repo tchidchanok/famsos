@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAMSOS คู่มือการใช้งาน</title>
+<style>
+  :root { --text:#1f2328; --muted:#59636e; --line:#d8dee4; --accent:#d32f2f; --bg:#ffffff;
+          --card:#fff5f4; --phone:#fffaf9; --phone-edge:#2b2b2b; --chip:#ffffff;
+          --purple:#5e35b1; --orange:#ef6c00; --blue:#1976d2; --green:#388e3c; --tip:#fff8e1; --tip-line:#f9a825; }
+  @media (prefers-color-scheme: dark) {
+    :root { --text:#e6edf3; --muted:#9198a1; --line:#30363d; --accent:#ff6b6b; --bg:#0d1117;
+            --card:#1b1f27; --phone:#fffaf9; --phone-edge:#555; --chip:#ffffff; --tip:#2a2412; --tip-line:#c9a227; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+         font:17px/1.75 -apple-system, "Segoe UI", "Noto Sans Thai", Sarabun, sans-serif; }
+  main { max-width:820px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:30px; margin:0 0 4px; line-height:1.3; }
+  h1 span { color:var(--accent); }
+  h2 { font-size:22px; margin:40px 0 10px; padding-top:20px; border-top:1px solid var(--line); line-height:1.4; }
+  h2 .n { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+          background:var(--accent); color:#fff; font-size:18px; margin-right:10px; vertical-align:2px; }
+  .muted { color:var(--muted); font-size:15px; }
+  a { color:var(--accent); }
+  ol, ul { padding-left:24px; margin:8px 0; }
+  li { margin:6px 0; }
+  b.btn { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:0 6px; font-weight:600; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  .toc { background:var(--card); border-radius:12px; padding:14px 20px; margin:20px 0; }
+  .toc ol { margin:4px 0; }
+  .step { display:flex; gap:28px; align-items:flex-start; }
+  .step .text { flex:1; min-width:0; }
+  .tip { background:var(--tip); border-left:4px solid var(--tip-line); border-radius:6px; padding:10px 14px; margin:14px 0; }
+  .warn { border-left:4px solid var(--accent); background:var(--card); border-radius:6px; padding:10px 14px; margin:14px 0; }
+
+  /* ภาพตัวอย่างหน้าจอ (วาดง่าย ๆ ไม่ใช่ภาพจริง) */
+  .phone { flex:0 0 220px; width:220px; border:6px solid var(--phone-edge); border-radius:26px; background:var(--phone);
+           color:#1f2328; padding:12px 12px 16px; font-size:12px; line-height:1.45; box-shadow:0 4px 14px rgba(0,0,0,.12); }
+  .phone .bar { display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:16px; margin-bottom:8px; }
+  .phone .icons { display:flex; gap:9px; font-size:14px; }
+  .phone .row { display:flex; align-items:center; gap:6px; margin:4px 0; }
+  .phone .chip { display:inline-block; border:1px solid #d6c8c6; border-radius:7px; padding:1px 7px; background:var(--chip); }
+  .phone .sos { width:118px; height:118px; margin:12px auto; border-radius:50%; background:#e53935; color:#fff;
+                box-shadow:0 0 0 7px #f3a19d; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .phone .sos b { font-size:32px; letter-spacing:1px; line-height:1; }
+  .phone .big { color:#fff; border-radius:10px; text-align:center; font-weight:700; padding:7px 4px; margin:6px 0; font-size:12.5px; }
+  .phone .card { background:#fdeceb; border-radius:9px; padding:7px 9px; margin:6px 0; }
+  .phone .hl { outline:3px solid #ffb300; outline-offset:2px; border-radius:6px; }
+  .phone .pill { display:inline-block; background:#8d4b48; color:#fff; border-radius:12px; padding:2px 9px; font-weight:600; }
+  .phone .title { font-weight:700; font-size:14px; margin-bottom:8px; }
+  .phone .btnrow { display:flex; gap:6px; margin-top:6px; }
+  .phone .btnrow span { flex:1; text-align:center; border-radius:7px; padding:3px 0; border:1px solid #c9b6b4; }
+  .phone .btnrow .p { background:#8d4b48; color:#fff; border-color:#8d4b48; }
+  .cap { text-align:center; color:var(--muted); font-size:13px; margin-top:6px; }
+
+  @media (max-width:640px) {
+    .step { flex-direction:column; gap:12px; }
+    .phone { margin:0 auto; }
+  }
+</style>
+</head>
+<body>
+<main>
+<h1><span>FAMSOS</span> คู่มือการใช้งาน</h1>
+<p class="muted">ฉบับย่อสำหรับทุกคนในครอบครัว · ปรับปรุงล่าสุด 17 พฤศจิกายน 2026 · <a href="#en">English below</a></p>
+
+<p>FAMSOS ใช้ส่งข้อความขอความช่วยเหลือและตำแหน่งของคุณถึงคนในครอบครัว
+ส่งได้ทั้งทาง<b>อินเทอร์เน็ต</b>, <b>Bluetooth</b> (มือถือที่อยู่ใกล้กันช่วยส่งต่อ ไม่ต้องมีเน็ต) และ <b>SMS</b>
+แอปเลือกทางที่ส่งได้ให้เอง</p>
+
+<div class="warn"><b>FAMSOS ไม่ใช่บริการแจ้งเหตุฉุกเฉินอย่างเป็นทางการ</b> เหตุร้ายแรงให้โทร
+<b>191</b> (ตำรวจ) <b>1669</b> (การแพทย์ฉุกเฉิน) <b>199</b> (ดับเพลิง) หรือ <b>112</b></div>
+
+<div class="toc">
+<b>สารบัญ</b>
+<ol>
+  <li><a href="#t1">ติดตั้งและอนุญาตสิทธิ์</a></li>
+  <li><a href="#t2">ตั้งชื่อของคุณ</a></li>
+  <li><a href="#t3">เพิ่มคนในครอบครัว</a></li>
+  <li><a href="#t4">ส่ง SOS และขอความช่วยเหลือ</a></li>
+  <li><a href="#t5">SOS เงียบ (เมื่อพูดหรือโทรไม่ได้)</a></li>
+  <li><a href="#t6">อ่านข้อความและคำขอเป็นครอบครัว</a></li>
+  <li><a href="#t7">ตอนไม่มีอินเทอร์เน็ต</a></li>
+  <li><a href="#t8">ตั้งค่าให้รับ SOS ได้ตลอด</a></li>
+</ol>
+</div>
+
+<h2 id="t1"><span class="n">1</span>ติดตั้งและอนุญาตสิทธิ์</h2>
+<ol>
+  <li>ติดตั้ง FAMSOS จาก Google Play (Android) หรือ TestFlight (iPhone)</li>
+  <li>เปิดแอป แล้วกด <b>อนุญาต</b> ทุกข้อที่แอปถาม
+    <ul>
+      <li><b>ตำแหน่ง</b> — แนบตำแหน่งไปกับข้อความ</li>
+      <li><b>Bluetooth / อุปกรณ์ใกล้เคียง</b> — ส่งข้อความตอนไม่มีเน็ต</li>
+      <li><b>การแจ้งเตือน</b> — ให้รู้ทันทีเมื่อมี SOS เข้ามา</li>
+      <li><b>กล้อง</b> — ใช้สแกน QR ของครอบครัวเท่านั้น</li>
+    </ul>
+  </li>
+</ol>
+<div class="tip">💡 ทุกคนในครอบครัวควรติดตั้งแอป แต่ถ้าบางคนไม่มีแอป ก็ยังส่ง SMS ถึงเขาได้ ถ้าใส่เบอร์โทรไว้</div>
+
+<h2 id="t2"><span class="n">2</span>ตั้งชื่อของคุณ</h2>
+<div class="step">
+  <div class="text">
+    <ol>
+      <li>ที่หน้าแรก แตะไอคอน <b>ครอบครัว</b> 👨‍👩‍👧 มุมขวาบน</li>
+      <li>แตะบรรทัดบนสุด <b class="btn">แตะเพื่อตั้งชื่อของคุณ</b></li>
+      <li>พิมพ์ชื่อที่ครอบครัวเรียก เช่น แม่, พ่อ, น้องบี แล้วกด <b class="btn">บันทึก</b></li>
+    </ol>
+    <p>ชื่อนี้จะแสดงในข้อความที่คุณส่ง แก้ได้ทุกเมื่อโดยแตะที่ชื่อ ✏️</p>
+  </div>
+  <div>
+    <div class="phone" aria-hidden="true">
+      <div class="title">← ครอบครัว</div>
+      <div class="card hl">👤 <b>แม่</b> ✏️<br><span style="color:#666">ชื่อนี้จะแสดงในข้อความที่คุณส่ง</span></div>
+      <div class="card">▦ แสดง QR ของฉัน</div>
+      <div class="card">ᛒ ส่ง/รับผ่าน Bluetooth <span class="pill">เปิด</span></div>
+      <div class="card">🔋 ทำงานเบื้องหลัง</div>
+    </div>
+    <div class="cap">ภาพตัวอย่าง</div>
+  </div>
+</div>
+
+<h2 id="t3"><span class="n">3</span>เพิ่มคนในครอบครัว</h2>
+<p>ต้องทำ<b>ทั้งสองเครื่อง</b> คือคุณเพิ่มเขา และเขาเพิ่มคุณ (หรือกดยอมรับคำขอ ดูข้อ 6)</p>
+<div class="step">
+  <div class="text">
+    <p><b>แบบอยู่ใกล้กัน (ง่ายที่สุด)</b></p>
+    <ol>
+      <li>เครื่องของอีกฝ่าย: ครอบครัว → <b class="btn">แสดง QR ของฉัน</b></li>
+      <li>เครื่องของคุณ: ครอบครัว → <b class="btn">+ เพิ่มสมาชิก</b> → <b class="btn">สแกน QR จากแอป FAMSOS ของอีกฝ่าย</b></li>
+      <li>ใส่ชื่อ และ<b>เบอร์โทร</b> (ใช้ส่ง SMS ตอนไม่มีเน็ต) แล้วกด <b class="btn">บันทึก</b></li>
+    </ol>
+    <p><b>แบบอยู่ไกลกัน</b></p>
+    <ol>
+      <li>อีกฝ่ายกด <b class="btn">แสดง QR ของฉัน</b> → <b class="btn">แชร์ QR</b> แล้วส่งทาง Line หรือแอปแชทอื่น</li>
+      <li>คุณกด<b>ลิงก์</b>ที่ได้รับบนมือถือที่มีแอป FAMSOS แอปจะเปิดหน้าเพิ่มสมาชิกให้เอง
+        <br>หรือบันทึกรูป QR ไว้ แล้วกด <b class="btn">เพิ่มสมาชิก</b> → <b class="btn">เลือกรูป QR จากเครื่อง</b></li>
+    </ol>
+    <div class="warn">ส่ง QR ให้เฉพาะคนในครอบครัวที่ไว้ใจ คนที่ได้ QR ของคุณจะส่งข้อความถึงคุณได้</div>
+    <p>ใส่ชื่อหรือเบอร์ผิด? แตะที่ชื่อสมาชิกเพื่อแก้ไข</p>
+  </div>
+  <div>
+    <div class="phone" aria-hidden="true">
+      <div class="title">← ครอบครัว</div>
+      <div class="row" style="justify-content:space-between"><b>สมาชิก (2)</b><span class="pill hl">+ เพิ่มสมาชิก</span></div>
+      <div class="card">ⓜ <b>แม่</b> <span style="float:right">☆ 🗑</span><br>✅ มีแอป FAMSOS 📡</div>
+      <div class="card">ⓟ <b>พ่อ</b> <span style="float:right">⭐ 🗑</span><br>📱 08x-xxx-xxxx ✅ มีแอป</div>
+    </div>
+    <div class="cap">ภาพตัวอย่าง</div>
+  </div>
+</div>
+
+<h2 id="t4"><span class="n">4</span>ส่ง SOS และขอความช่วยเหลือ</h2>
+<div class="step">
+  <div class="text">
+    <ul>
+      <li><b>SOS:</b> <b>กดค้างที่ปุ่ม SOS สีแดง 3 วินาที</b> ส่ง "ต้องการความช่วยเหลือด่วน!" พร้อมตำแหน่งถึงทุกคนในครอบครัว เครื่องของครอบครัวจะดังเตือนแม้เปิดโหมดเงียบ</li>
+      <li><b class="btn" style="background:var(--purple);color:#fff">ส่งเสียงขอความช่วยเหลือ</b> เปิดไซเรน เสียงพูด และไฟกะพริบ ให้คนรอบตัวหาคุณเจอ</li>
+      <li><b class="btn" style="background:var(--orange);color:#fff">ขอความช่วยเหลือ</b> เลือกเรื่อง เช่น บาดเจ็บ, ติดอยู่/น้ำท่วม, ต้องการอาหาร/น้ำ/ยา หรือพิมพ์เอง</li>
+      <li><b class="btn" style="background:var(--blue);color:#fff">ส่งตำแหน่งของฉัน</b> บอกครอบครัวว่าคุณอยู่ที่ไหน</li>
+      <li><b class="btn" style="background:var(--green);color:#fff">ฉันปลอดภัย</b> ให้ครอบครัวหายห่วง</li>
+    </ul>
+    <p>หลังส่ง แอปจะบอกว่าส่งถึงใครแล้ว และทางไหน ดูย้อนหลังได้ที่ไอคอน <b>ข้อความที่ส่ง</b> 📤 (ถึงแล้ว / อ่านแล้ว)</p>
+    <div class="tip">💡 ถ้าส่งทางอินเทอร์เน็ตหรือ Bluetooth ไม่ถึงบางคน แอปจะมีปุ่ม <b class="btn">ส่ง SMS ด้วย</b> ให้กดส่งต่อทาง SMS</div>
+  </div>
+  <div>
+    <div class="phone" aria-hidden="true">
+      <div class="bar">FAMSOS <span class="icons">📥 📤 👨‍👩‍👧</span></div>
+      <div class="row">📶 ออนไลน์ ส่งผ่านอินเทอร์เน็ตได้</div>
+      <div class="row"><span class="chip">ᛒ รอบตัว 2</span></div>
+      <div class="sos hl"><b>SOS</b><span>กดค้าง 3 วินาที</span></div>
+      <div class="big" style="background:var(--purple)">📢 ส่งเสียงขอความช่วยเหลือ</div>
+      <div class="big" style="background:var(--orange)">🛟 ขอความช่วยเหลือ</div>
+      <div class="big" style="background:var(--blue)">◎ ส่งตำแหน่งของฉัน</div>
+      <div class="big" style="background:var(--green)">✔ ฉันปลอดภัย</div>
+    </div>
+    <div class="cap">ภาพตัวอย่าง: หน้าแรก</div>
+  </div>
+</div>
+
+<h2 id="t5"><span class="n">5</span>SOS เงียบ (เมื่อพูดหรือโทรไม่ได้)</h2>
+<p>ใช้เมื่ออยู่ในอันตรายแต่ไม่อยากให้คนรอบตัวรู้ เช่น ถูกคุกคาม แอปจะส่งตำแหน่งให้คนที่ไว้ใจอย่างเงียบ ๆ <b>หน้าจอไม่เปลี่ยน ไม่มีเสียง</b></p>
+<ol>
+  <li><b>เตรียมไว้ก่อน:</b> ในหน้าครอบครัว แตะ <b>ดาว ☆</b> ข้างชื่อคนที่ไว้ใจให้เป็น ⭐ (SOS เงียบส่งถึงเฉพาะคนที่ติดดาว)</li>
+  <li><b>เริ่ม:</b> ที่หน้าแรก <b>แตะคำว่า "FAMSOS" ด้านบน 3 ครั้งติดกันเร็ว ๆ</b> มือถือจะ<b>สั่นยาว 1 ครั้ง</b> แล้วเริ่มส่งหลังจากนั้น 5 วินาที</li>
+  <li><b>แตะโดนโดยไม่ตั้งใจ?</b> แตะ 3 ครั้งอีกครั้งภายใน 5 วินาที จะสั่นสั้น 2 ครั้ง = ยกเลิก ไม่มีอะไรถูกส่ง</li>
+  <li>ระหว่างนี้แอปส่งตำแหน่งล่าสุดทุก 5 นาที นานสุด 2 ชั่วโมง</li>
+  <li><b>จบ:</b> แตะ "FAMSOS" 3 ครั้งอีกครั้ง (สั่นสั้น 2 ครั้ง) ครอบครัวจะได้ข้อความว่า "ปลอดภัยแล้ว"</li>
+</ol>
+<div class="tip">💡 ถ้าคุณได้รับ <b>⚠️ SOS เงียบ</b> จากครอบครัว <b>อย่าโทรหาเขาโดยตรง</b> เพราะอาจทำให้คนร้ายรู้ ให้ดูตำแหน่ง แล้วติดต่อตำรวจ 191</div>
+
+<h2 id="t6"><span class="n">6</span>อ่านข้อความและคำขอเป็นครอบครัว</h2>
+<div class="step">
+  <div class="text">
+    <ul>
+      <li>แตะไอคอน <b>ข้อความเข้า</b> 📥 มุมขวาบนของหน้าแรก</li>
+      <li>ข้อความที่มีตำแหน่ง แตะ<b>ไอคอนแผนที่</b> 🗺 เพื่อดูตำแหน่ง</li>
+      <li>ปัดข้อความไปทางซ้ายหรือขวาเพื่อลบ</li>
+      <li>เมื่อมีคนเพิ่มคุณเป็นครอบครัว จะมีการ์ด <b>"... ขอเพิ่มคุณเป็นครอบครัว"</b>
+        <ul>
+          <li><b class="btn">ยอมรับ</b> — เพิ่มเขาเป็นครอบครัวทันที ไม่ต้องสแกน QR</li>
+          <li><b class="btn">บล็อก</b> — ไม่รับอะไรจากคนนี้อีก (เขาไม่รู้ว่าถูกบล็อก)</li>
+          <li><b class="btn">ลบคำขอ</b> — ลบทิ้งไปก่อน</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="warn">ยอมรับเฉพาะคนที่รู้จักจริง เพราะใครก็ตั้งชื่อตัวเองว่า "แม่" ได้ ถ้าไม่แน่ใจ ให้โทรถามก่อน</div>
+    <p>ข้อความจากคนที่ไม่อยู่ในรายชื่อครอบครัวจะมีป้าย <b>"ไม่ได้อยู่ในรายชื่อครอบครัว"</b> และจะไม่ดังเตือนเต็มจอ
+    บล็อกผิดคน? เลิกบล็อกได้ที่ท้ายหน้าครอบครัว</p>
+  </div>
+  <div>
+    <div class="phone" aria-hidden="true">
+      <div class="title">← ข้อความจากครอบครัว</div>
+      <div class="card"><b>ป้าแดง ขอเพิ่มคุณเป็นครอบครัว</b><br>
+        <span style="color:#666">ยอมรับเฉพาะคนที่คุณรู้จักจริง</span>
+        <div class="btnrow"><span class="p hl">ยอมรับ</span><span>บล็อก</span><span>ลบคำขอ</span></div></div>
+      <div class="card">🆘 <b>พ่อ</b> · 09:12<br>ต้องการความช่วยเหลือด่วน!<br><span style="float:right" class="chip">🗺</span></div>
+    </div>
+    <div class="cap">ภาพตัวอย่าง: ข้อความเข้า</div>
+  </div>
+</div>
+
+<h2 id="t7"><span class="n">7</span>ตอนไม่มีอินเทอร์เน็ต</h2>
+<ul>
+  <li>เปิด <b>Bluetooth</b> และ<b>ตำแหน่ง</b>ของมือถือไว้เสมอ</li>
+  <li>หน้าแรกจะบอกจำนวนมือถือ FAMSOS <b>รอบตัว</b> ข้อความจะส่งผ่านมือถือเหล่านั้นต่อกันไปจนถึงครอบครัว
+      (เครื่องที่ช่วยส่งต่ออ่านข้อความไม่ได้)</li>
+  <li>ถ้ายังไม่เจอใคร ข้อความจะ<b>ฝากรอไว้</b> และส่งเองเมื่อเจอเครื่องรอบตัวหรือเมื่อกลับมามีเน็ต</li>
+  <li>ถ้ามีสัญญาณโทรศัพท์ กด <b class="btn">ส่ง SMS ด้วย</b> เพื่อส่งเป็น SMS ถึงคนที่ใส่เบอร์ไว้</li>
+  <li>มือถือส่วนใหญ่โทร <b>112</b> ได้แม้ไม่มีซิม ดูเบอร์ทั้งหมดที่ปุ่ม <b class="btn">เบอร์ฉุกเฉิน</b> ล่างสุดของหน้าแรก</li>
+</ul>
+<div class="tip">💡 ลองซ้อมก่อนเกิดเหตุจริง: เปิดโหมดเครื่องบิน แล้วเปิด Bluetooth กลับ ลองส่ง "ฉันปลอดภัย" หาคนในบ้าน</div>
+
+<h2 id="t8"><span class="n">8</span>ตั้งค่าให้รับ SOS ได้ตลอด</h2>
+<ul>
+  <li><b>Android:</b> หน้าครอบครัว → แตะ <b class="btn">ทำงานเบื้องหลัง</b> แล้วเลือก FAMSOS เป็น "ไม่ต้องเพิ่มประสิทธิภาพ" หรือ "ไม่จำกัด"
+      บางยี่ห้อ (เช่น vivo, Huawei, Xiaomi) ต้องเปิด "เริ่มอัตโนมัติ" ในตั้งค่าแอปด้วย</li>
+  <li>เปิดสวิตช์ <b>ส่ง/รับผ่าน Bluetooth</b> ไว้ (ใช้แบตเพิ่มเล็กน้อย)</li>
+  <li><b>iPhone:</b> อย่าปัดปิดแอปทิ้ง และอนุญาตการแจ้งเตือน</li>
+</ul>
+
+<p class="muted" style="margin-top:32px">มีคำถาม: <a href="mailto:famsosapp@gmail.com">famsosapp@gmail.com</a> ·
+<a href="privacy.html">นโยบายความเป็นส่วนตัว</a> · <a href="terms.html">ข้อกำหนดการใช้งาน</a></p>
+
+<!-- ======================= English ======================= -->
+<h2 id="en" style="font-size:26px">FAMSOS quick guide (English)</h2>
+<p>FAMSOS sends help messages and your location to your family over the <b>internet</b>, over <b>Bluetooth</b>
+(nearby phones pass it along, no internet needed) or by <b>SMS</b>. The app picks whatever works.</p>
+<div class="warn"><b>FAMSOS is not an official emergency service.</b> In a serious emergency call 191 (police), 1669 (medical), 199 (fire) or 112.</div>
+
+<h2><span class="n">1</span>Install and allow access</h2>
+<p>Install from Google Play (Android) or TestFlight (iPhone). Open the app and <b>allow</b> everything it asks for:
+location (attached to messages), Bluetooth / nearby devices (no-internet sending), notifications (SOS alerts) and camera (only for scanning family QR codes).</p>
+
+<h2><span class="n">2</span>Set your name</h2>
+<p>Home → <b>Family</b> icon (top right) → tap <b class="btn">Tap to set your name</b> → type the name your family knows you by → <b class="btn">Save</b>.</p>
+
+<h2><span class="n">3</span>Add family</h2>
+<p>Both phones need to add each other (or accept the request, see 6).</p>
+<ul>
+  <li><b>Side by side:</b> their phone shows <b class="btn">Show my QR</b>; on yours tap <b class="btn">Add member</b> → <b class="btn">Scan the QR from their FAMSOS app</b>, add their phone number for SMS, then <b class="btn">Save</b>.</li>
+  <li><b>Far apart:</b> they tap <b class="btn">Show my QR</b> → <b class="btn">Share QR</b> and send it on LINE or any chat app. Tap the link on a phone with FAMSOS, or save the picture and use <b class="btn">Pick QR from photos</b>.</li>
+  <li>Tap a member's name to fix their name or number.</li>
+</ul>
+<div class="warn">Only share your QR with family you trust. Anyone who has it can message you.</div>
+
+<h2><span class="n">4</span>SOS and asking for help</h2>
+<ul>
+  <li><b>Hold the red SOS button for 3 seconds</b> to send "I need help urgently!" with your location to all family. Their phones ring even on silent.</li>
+  <li><b>Sound for help</b>: siren, voice and flashing light so people nearby can find you.</li>
+  <li><b>Ask for help</b>: pick injured, trapped/flooding, need food/water/medicine, fire/danger, or type your own.</li>
+  <li><b>Send my location</b> and <b>I'm safe</b>.</li>
+  <li>See delivery status (delivered / read) under the <b>Sent messages</b> icon. If someone wasn't reached, tap <b class="btn">Also send SMS</b>.</li>
+</ul>
+
+<h2><span class="n">5</span>Silent SOS</h2>
+<p>For when you're in danger and can't speak or call. Nothing changes on screen and nothing makes a sound.</p>
+<ol>
+  <li><b>Beforehand:</b> on the Family screen, tap the <b>star ☆</b> next to people you trust. Only starred people get silent SOS.</li>
+  <li><b>Start:</b> tap the word <b>"FAMSOS"</b> at the top of the home screen <b>3 times quickly</b>. One <b>long vibration</b>, then it sends after 5 seconds.</li>
+  <li><b>Tapped by mistake?</b> Tap 3 times again within 5 seconds: two short vibrations, nothing is sent.</li>
+  <li>Your location is sent every 5 minutes for up to 2 hours. Tap 3 times again to end it.</li>
+</ol>
+<div class="tip">💡 If you receive a <b>⚠️ Silent SOS</b>, <b>don't call them directly</b>, it could give them away. Check the location and contact the police.</div>
+
+<h2><span class="n">6</span>Inbox and family requests</h2>
+<ul>
+  <li>Tap the <b>Inbox</b> icon. Tap the <b>map icon</b> 🗺 to see the location. Swipe a message to delete it.</li>
+  <li>When someone adds you, a <b>"… wants to add you as family"</b> card appears: <b class="btn">Accept</b>, <b class="btn">Block</b> or <b class="btn">Dismiss</b>.</li>
+  <li>Only accept people you really know; anyone can call themselves "Mom". Unblock at the bottom of the Family screen.</li>
+</ul>
+
+<h2><span class="n">7</span>No internet</h2>
+<ul>
+  <li>Keep Bluetooth and location on. The home screen shows how many FAMSOS phones are <b>nearby</b>; messages hop between them to reach your family (relaying phones can't read them).</li>
+  <li>If nobody is nearby, messages wait and go out later by themselves.</li>
+  <li>With phone signal, use <b class="btn">Also send SMS</b>. Most phones can call 112 even without a SIM.</li>
+  <li>Practise once: airplane mode, turn Bluetooth back on, send "I'm safe" to someone at home.</li>
+</ul>
+
+<h2><span class="n">8</span>Get SOS alerts all the time</h2>
+<ul>
+  <li><b>Android:</b> Family → <b class="btn">Keep running in the background</b> → set FAMSOS to "Don't optimize" / "Unrestricted". Some brands also need "Auto-start" on.</li>
+  <li>Keep <b>Send and receive over Bluetooth</b> switched on.</li>
+  <li><b>iPhone:</b> don't swipe the app away, and allow notifications.</li>
+</ul>
+
+<p class="muted" style="margin-top:32px">Questions: <a href="mailto:famsosapp@gmail.com">famsosapp@gmail.com</a> ·
+<a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</main>
+</body>
+</html>
